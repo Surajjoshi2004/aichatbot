@@ -5,7 +5,7 @@ import requests
 # Configure Gemini API
 genai.configure(api_key="AIzaSyBSiY9Mi1db3LMDj8Py2YYBAsG_IHmIRwY")
 
-model = genai.GenerativeModel("gemini-pro")
+model = genai.GenerativeModel("gemini-1.5-pro")
 
 # Streamlit UI
 st.set_page_config(page_title="🚀 SpaceBot", layout="centered")
