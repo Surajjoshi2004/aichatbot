@@ -1,45 +1,50 @@
 import streamlit as st
+import google.generativeai as genai
 import requests
 
-st.set_page_config(page_title="AI Space Chatbot", page_icon="🛰️")
-st.title("🚀 Space Exploration AI Chatbot")
+# Configure Gemini API
+genai.configure(api_key="AIzaSyBSiY9Mi1db3LMDj8Py2YYBAsG_IHmIRwY")
 
-# Hugging Face token
-HF_TOKEN = "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"
+model = genai.GenerativeModel("gemini-pro")
 
+# Streamlit UI
+st.set_page_config(page_title="🚀 SpaceBot", layout="centered")
+st.title("🌌 Space Exploration Chatbot")
 
-# Function to call Hugging Face API
-def query_huggingface(prompt):
-    API_URL = "https://api-inference.huggingface.co/models/google/flan-t5-small"
-    headers = {"Authorization": f"Bearer {HF_TOKEN}"}
-    payload = {"inputs": prompt}
+user_input = st.text_input("Ask me something about space:")
 
-    response = requests.post(API_URL, headers=headers, json=payload)
+# Free API Functions
+def get_iss_location():
+    res = requests.get("http://api.open-notify.org/iss-now.json").json()
+    pos = res['iss_position']
+    return f"The ISS is at:\nLatitude: {pos['latitude']}, Longitude: {pos['longitude']}"
 
-    if response.status_code == 200:
-        result = response.json()
-        return result[0]['generated_text']
-    else:
-        return "🤖 Sorry, the AI is on a coffee break right now."
+def get_astronauts():
+    res = requests.get("http://api.open-notify.org/astros.json").json()
+    people = [p['name'] for p in res['people']]
+    return f"There are {len(people)} astronauts in space:\n" + ', '.join(people)
 
+def get_apod():
+    nasa_key = "w14IH6vVFpo5jcCIFgm7jCIWYMZzMOTqk6FRgQdG"  # Replace with your own if you have one
+    url = f"https://api.nasa.gov/planetary/apod?api_key={nasa_key}"
+    res = requests.get(url).json()
+    return f"📷 {res['title']}\n\n{res['explanation']}\n\nImage: {res['url']}"
 
-# Chat interface
-if "history" not in st.session_state:
-    st.session_state.history = []
+def ask_gemini(question):
+    try:
+        response = model.generate_content(question)
+        return response.text
+    except Exception as e:
+        return f"❌ Error: {str(e)}"
 
-user_input = st.text_input("👨‍🚀 You:", placeholder="Plan a mission to Mars", key="input")
-
+# Process input
 if user_input:
-    prompt = f"You are an expert space mission planner AI. Help with: {user_input}"
-    with st.spinner("Thinking... 🚀"):
-        ai_reply = query_huggingface(prompt)
-
-    st.session_state.history.append(("You", user_input))
-    st.session_state.history.append(("AI", ai_reply))
-
-# Display chat
-for speaker, msg in st.session_state.history:
-    if speaker == "You":
-        st.markdown(f"**🧑‍🚀 You:** {msg}")
+    if "iss" in user_input.lower():
+        st.success(get_iss_location())
+    elif "astronaut" in user_input.lower():
+        st.success(get_astronauts())
+    elif "picture" in user_input.lower() or "apod" in user_input.lower():
+        st.success(get_apod())
     else:
-        st.markdown(f"**🤖 AI:** {msg}")
+        answer = ask_gemini(user_input)
+        st.info(answer)
