@@ -9,31 +9,29 @@ st.set_page_config(
     page_icon="🌠"
 )
 
-# ==== 💫 BACKGROUND CSS ====
+# ==== 🎨 SOFT DARK-LIGHT UI ====
 st.markdown("""
     <style>
-        body {
-            background-color: #0b0c2a;
-            color: white;
-        }
         .stApp {
-            background: linear-gradient(135deg, #0b0c2a 0%, #1c1f4a 100%);
-            color: white;
-            font-family: 'Courier New', monospace;
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+            font-family: 'Segoe UI', sans-serif;
         }
         h1 {
             text-align: center;
-            color: #F9FAFB;
+            color: #ffffff;
         }
         .stTextInput input {
-            background-color: #2c2f6c;
-            color: white;
-            border: 1px solid #888;
+            background-color: #333333;
+            color: #ffffff;
+            border: 1px solid #555555;
         }
         .stButton>button {
-            background-color: #3d3f9e;
+            background-color: #444;
             color: white;
-            border-radius: 8px;
+            border-radius: 6px;
+            padding: 0.5em 1em;
+            border: none;
         }
         .stMarkdown {
             font-size: 16px;
