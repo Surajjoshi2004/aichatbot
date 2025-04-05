@@ -66,7 +66,7 @@ def get_astronauts():
 
 # ==== 🌌 NASA APOD ====
 def get_apod():
-    nasa_key = ""w14IH6vVFpo5jcCIFgm7jCIWYMZzMOTqk6FRgQdG""
+    nasa_key = "w14IH6vVFpo5jcCIFgm7jCIWYMZzMOTqk6FRgQdG"
     url = f"https://api.nasa.gov/planetary/apod?api_key={nasa_key}"
     res = requests.get(url).json()
     return f"📸 **{res['title']}**\n\n{res['explanation']}\n\n🖼️ [View Image]({res['url']})"
