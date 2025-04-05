@@ -43,7 +43,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ==== 🔑 CONFIGURE GEMINI ====
-genai.configure(api_key=st.secrets["AIzaSyBSiY9Mi1db3LMDj8Py2YYBAsG_IHmIRwY"])
+genai.configure(api_key="AIzaSyBSiY9Mi1db3LMDj8Py2YYBAsG_IHmIRwY")
 model = genai.GenerativeModel("gemini-1.5-pro")
 
 # ==== 🚀 TITLE ====
