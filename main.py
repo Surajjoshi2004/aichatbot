@@ -9,25 +9,25 @@ st.set_page_config(
     page_icon="🌠"
 )
 
-# ==== 🎨 SOFT DARK-LIGHT UI ====
+# ==== 🎨 LIGHT UI STYLING ====
 st.markdown("""
     <style>
         .stApp {
-            background-color: #1a1a1a;
-            color: #f0f0f0;
+            background-color: #f9f9f9;
+            color: #000000;
             font-family: 'Segoe UI', sans-serif;
         }
         h1 {
             text-align: center;
-            color: #ffffff;
+            color: #111111;
         }
         .stTextInput input {
-            background-color: #333333;
-            color: #ffffff;
-            border: 1px solid #555555;
+            background-color: #ffffff;
+            color: #000000;
+            border: 1px solid #cccccc;
         }
         .stButton>button {
-            background-color: #444;
+            background-color: #4a90e2;
             color: white;
             border-radius: 6px;
             padding: 0.5em 1em;
