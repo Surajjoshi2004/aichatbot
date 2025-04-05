@@ -5,7 +5,7 @@ st.set_page_config(page_title="AI Space Chatbot", page_icon="🛰️")
 st.title("🚀 Space Exploration AI Chatbot")
 
 # Hugging Face token
-HF_TOKEN = "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"
+HF_TOKEN = "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"
 
 
 # Function to call Hugging Face API
